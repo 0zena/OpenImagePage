@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles/style-index-header.css">
+    <link rel="stylesheet" href="static/styles/style-index-colaider.css">
+    <title>Pontarest</title>
+</head>
+<body>
+    <header>  
+        <div class="header-logo">
+            <img src="static/images/logo-pinterest-grey.png" alt="logo">
+        </div>
+        
+        <div class="header-name">
+            <h2>Pontarest</h2>
+        </div>
+
+        <div class="header-search">
+            <input type="text" placeholder="search">
+        </div>
+
+        <div class="header-buttons">
+            <div class="header-login">
+                <a href="register.html">
+                    <input type="submit" value="Login" id="login-submit">
+                </a>
+            </div>
+    
+            <div class="header-register">
+                <a href="register.html">
+                    <input type="submit" value="Sign up" id="register-submit">
+                </a>
+            </div>
+    
+            <section class="header-more">
+                <button id="corner-menu-button"><ion-icon name="arrow-dropdown" size="large"></ion-icon></button>
+            </section>
+        </div>
+    </header>
+
+    <aside class="corner-popup-menu" id="corner-popup-menu">
+        <a href=""><p>About Pontarest</p></a>
+        <a href=""><p>See terms & privacy</p></a>
+        <a href=""><p>Contact us</p></a>
+    </aside>
+
+    <div class="content-colaider" id="image-container"></div>
+
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <script src="static/scripts/script-menu.js"></script>
+    <script src="static/scripts/script-api.js"></script>
+</body>
+</html>

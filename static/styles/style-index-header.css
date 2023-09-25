@@ -1,0 +1,106 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "helvetica";
+}
+
+body {
+    overflow-x: hidden;
+}
+
+header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid black;
+}
+
+header .header-logo img {
+    padding: 10px;
+    width: 35px;
+}
+
+.header-search {
+    padding: 0 0 0 10px;
+    height: 30px;
+    width: 100%;
+}
+
+.header-search input{
+    border-radius: 20px;
+    border: 2px solid black;
+    height: 100%;
+    width: 100%;
+}
+
+.header-search input::placeholder{
+    color: black;
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+header .header-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px 0 10px;
+    height: 35px;
+}
+
+header .header-buttons a input {
+    font-size: 16px;
+    font-weight: bold;
+    font: bolder;
+    margin: 0px 5px 0px 5px;
+    padding: 0px 5px 0px 5px;
+    border-radius: 15px;
+    height: 100%;
+    border: none;
+    transition: all 0.3s ease 0s;
+}
+
+header .header-buttons a input:hover {
+    color: black;
+}
+
+.header-login a>input {
+    color: white;
+    background-color: grey;
+}
+
+.header-register a>input {
+    color: white;
+    background-color: lightgrey;
+}
+
+.header-more button {
+    border: none;
+    background-color: white;
+    transition: all 0.3s ease 0s;
+}
+
+.header-more button:hover {
+    background-color: grey;
+    border-radius: 25px;
+}
+
+.corner-popup-menu {
+    position: absolute;
+    padding: 1rem 2rem 1rem 1rem;
+    right: -200px;
+    border-bottom-left-radius: 25px;
+    background-color: grey;
+    font-weight: bolder;
+    height: 100px;
+    width: max-content;
+}
+
+.corner-popup-menu a {
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease 0s;
+}
+
+.corner-popup-menu a:hover {
+    color: black;
+}
