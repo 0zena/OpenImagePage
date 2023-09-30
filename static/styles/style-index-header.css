@@ -25,6 +25,7 @@ header .header-logo img {
     padding: 0 0 0 10px;
     height: 30px;
     width: 100%;
+    margin: 0 20px 0 0; 
 }
 
 .header-search input{
@@ -32,11 +33,11 @@ header .header-logo img {
     border: 2px solid black;
     height: 100%;
     width: 100%;
+    padding: 0 0 0 20px;
 }
 
 .header-search input::placeholder{
     color: black;
-    padding-left: 20px;
     font-size: 14px;
 }
 
