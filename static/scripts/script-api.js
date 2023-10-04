@@ -1,6 +1,7 @@
 const token  = config.accessKey;
 const link1 = `https://api.unsplash.com/photos/random/?count=30&client_id=${token}`;
 const divContainer = document.getElementById("image-container");
+const searchBar = document.querySelector('#search-bar');
 
 async function GetRequest(link) {
     try {
@@ -12,9 +13,9 @@ async function GetRequest(link) {
             
             photos.forEach(element => {
                 divContainer.innerHTML +=
-                `<div class="blurred-image">
-                <img src="${element.urls.small}" loading="lazy" id="image-box"> 
-                <span>${element.alt_description}</span> 
+                `<div id="img-div">
+                <img src="${element.urls.regular}" loading="lazy" id="img-box"> 
+                <span id="span-box">${element.alt_description}</span> 
                 </div>`;
             });
         } else if (photos.results && Array.isArray(photos.results)) {
@@ -22,9 +23,9 @@ async function GetRequest(link) {
             
             photos.results.forEach(element => {
                 divContainer.innerHTML +=
-                    `<div class="blurred-image" >
-                    <img src="${element.urls.small}" loading="lazy" id="image-box"> 
-                    <span>${element.alt_description}</span> 
+                    `<div id="img-div">
+                    <img src="${element.urls.regular}" loading="lazy" id="img-box" class="img-box"/>
+                    <span id="span-box">${element.alt_description}</span> 
                     </div>`;
             });
         }
@@ -35,9 +36,6 @@ async function GetRequest(link) {
     }
 }
 
-GetRequest(link1);
-
-const searchBar = document.querySelector('#search-bar');
 
 searchBar.addEventListener("keyup", function(event) {
     if (event.key == "Enter") {
@@ -49,3 +47,4 @@ searchBar.addEventListener("keyup", function(event) {
     }
 });
 
+GetRequest(link1)
