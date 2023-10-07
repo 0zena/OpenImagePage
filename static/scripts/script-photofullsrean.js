@@ -1,16 +1,24 @@
-function displayPopup(event) {
+let popupDiv = null;
+
+divContainer.addEventListener('click', (event) => {
     const clickElement = event.target;
     const divElement = clickElement.closest('#img-div');
-    const buttonClicked = document.getElementsByClassName("close-div");
-    
-    divElement.id = "popup-div";
-    
-    divElement.innerHTML += `<button id="close-div"></button>`;
-    
-    
-    buttonClicked.addEventListener('click', () => {
-        divElement.id = "img-div";
-    });
-}
+    if (popupDiv == null) {
+        divElement.id = "popup-div";
+        divElement.innerHTML += `<button id="close-div" onclick="CloseDiv()">Close</button>`;
+        popupDiv = divElement; 
+    }
+});
 
-divContainer.addEventListener('click', displayPopup);
+function CloseDiv() {
+    if (popupDiv) {
+        const closeDivButton = popupDiv.querySelector("#close-div");
+
+        if (closeDivButton) {
+            closeDivButton.remove();
+        }
+
+        popupDiv.id = "img-div";
+        popupDiv = null; 
+    }
+}

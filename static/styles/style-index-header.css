@@ -85,23 +85,25 @@ header .header-buttons a input:hover {
     border-radius: 25px;
 }
 
-.corner-popup-menu {
+#corner-popup-menu {
     position: absolute;
     padding: 1rem 2rem 1rem 1rem;
-    right: -200px;
+    right: 0px;
+    top: 61px;
     border-bottom-left-radius: 25px;
     background-color: grey;
     font-weight: bolder;
     height: 100px;
     width: max-content;
+    z-index: 2;
 }
 
-.corner-popup-menu a {
+#corner-popup-menu a {
     text-decoration: none;
     color: white;
     transition: all 0.3s ease 0s;
 }
 
-.corner-popup-menu a:hover {
+#corner-popup-menu a:hover {
     color: black;
 }

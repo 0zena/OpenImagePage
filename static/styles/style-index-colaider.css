@@ -39,19 +39,24 @@
 
 #popup-div {
     background-color: grey;
-    height: 50%;
-    width: fit-content;
+    height: fit-content;
+    width: 70%;
     display: flex;
     align-items: center;
+    justify-content: center;
     position: fixed;
     z-index: 2;
-    top: 25%;
-    left: 25%;
+    top: 15%;
+    left: 15%;
 }
 
 #popup-div img {
-    height: 100%;
-    width: auto;
+    height: auto;
+    width: 70%;
+}
+
+#popup-div img:hover {
+    opacity: 1;
 }
 
 #close-div {
