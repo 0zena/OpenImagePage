@@ -39,21 +39,20 @@
 
 #popup-div {
     background-color: grey;
-    height: fit-content;
-    width: 70%;
+    height: 70%;
+    min-width: fit-content;
     display: flex;
     align-items: center;
-    justify-content: center;
     position: fixed;
     z-index: 2;
     top: 15%;
-    left: 15%;
+    left: 5%;
 }
-
+ 
 #popup-div img {
-    height: auto;
-    width: 70%;
-}
+    height: 75%;
+    width: auto;
+} 
 
 #popup-div img:hover {
     opacity: 1;
@@ -68,9 +67,32 @@
     border-radius: 20px;
 }
 
+@media (max-width: 2500px) {
+    #popup-div {
+        height: 50%;
+        width: 50%;
+        top: 25%;
+        left: 25%;
+    }
+    #popup-div img {
+        height: 75%;
+        width: auto;
+    }
+}
+
 @media (max-width: 1500px) {
     .content-colaider {
         column-count: 6;
+    }
+    #popup-div {
+        height: 50%;
+        width: 50%;
+        top: 25%;
+        left: 25%;
+    }
+    #popup-div img {
+        height: 75%;
+        width: auto;
     }
 }
 
@@ -84,16 +106,45 @@
     .content-colaider {
         column-count: 4;
     }
+    #popup-div {
+        height: 50%;
+        width: 50%;
+        top: 25%;
+        left: 25%;
+    }
+    #popup-div img {
+        height: 65%;
+        width: auto;
+    }
 }
 
 @media (max-width: 800px) {
     .content-colaider {
         column-count: 3;
     }
+    #popup-div {
+        min-height: fit-content;
+        width: 50%;
+        top: 25%;
+        left: 25%;
+    }
+    #popup-div img {
+        height: auto;
+        width: 65%;
+    }
 }
 
 @media (max-width: 600px) {
     .content-colaider {
         column-count: 2;
+    }
+    #popup-div {
+        top: 15%;
+        left: 15%;
+    }
+    #popup-div img {
+        min-height: fit-content;
+        height: auto;
+        width: 70%;
     }
 }
