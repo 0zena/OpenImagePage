@@ -1,13 +1,7 @@
-* {
-    padding: 0;
-    margin: 0;
-    font-family: cursive;
-    color: white;
-}
+@import "/static/styles/base.css";
 
-body {
-    background-color: lightgrey;
-    background-size: cover;
+* {
+    color: white;
 }
 
 header {
