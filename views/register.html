@@ -8,29 +8,21 @@
 </head>
 <body>
     <div class="container">
-        <div class="form" action="http://localhost:3000/register">
+        <div class="form" action="/register" method="POST">
             <h1>Welcome!</h1>
             <h2>Let`s create your account</h2>
 
             <ion-icon name="person"></ion-icon>
-            <h4 class="name">Name</h4>
-            <input type="text" placeholder="Name" required>
-
-            <ion-icon name="person"></ion-icon>
-            <h4 class="surname">Surname</h4>
-            <input type="text" placeholder="Surname" required>
+            <h4 class="username">Name</h4>
+            <input type="text" placeholder="Username" name="username" required>
 
             <ion-icon name="mail"></ion-icon>
             <h4 class="email">E-mail</h4>
-            <input type="text" placeholder="E-mail" required>
+            <input type="text" placeholder="E-mail" name="email" required>
 
             <ion-icon name="lock"></ion-icon>
             <h4 class="password-1">Pasword</h4>
-            <input type="password" placeholder="Pasword" required>
-
-            <ion-icon name="lock"></ion-icon>
-            <h4 class="password-2">Confirm Pasword</h4>
-            <input type="password" placeholder="Confirm Pasword" required>
+            <input type="password" placeholder="Pasword" name="password" required>
 
             <div class="buttons">
                 <a href="/">

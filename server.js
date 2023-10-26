@@ -1,11 +1,19 @@
-//#region const
 const express = require('express')
+const { connection } = require('mongoose')
+const mySQL = require('mysql')
 const app = express()
 const port = 3000
 const path = require('path')
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:3000')
-//#endregion
+const dotenv = require('dotenv')
+
+dotenv.config({path: './.env'})
+
+const dataBase = mySQL.createConnection({
+  host: process.env.DB_HOST, 
+  user: process.env.DB_USER, 
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
+})
 
 app.use('/static', express.static('static'))
 app.use('/views', express.static('views'));
@@ -23,5 +31,10 @@ app.get('/register', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Hosting port ${port}`)
+  console.log(`Hosting port: ${port}`)
+})
+
+dataBase.connect( (error) => {
+  let msg = error ? "FAILED" : "CONNECTED"
+  console.log(`SQL: ${msg}`)
 })
