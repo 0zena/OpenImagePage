@@ -1,5 +1,4 @@
 const express = require('express')
-const { connection } = require('mongoose')
 const mySQL = require('mysql')
 const app = express()
 const port = 3000
@@ -15,8 +14,10 @@ const dataBase = mySQL.createConnection({
   database: process.env.DB_DATABASE
 })
 
+app.use(express.json())
 app.use('/static', express.static('static'))
 app.use('/views', express.static('views'));
+app.use('/auth', require('./routes/auth'))
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'))
