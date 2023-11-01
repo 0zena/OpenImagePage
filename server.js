@@ -14,10 +14,12 @@ const dataBase = mySQL.createConnection({
   database: process.env.DB_DATABASE
 })
 
-app.use(express.json())
 app.use('/static', express.static('static'))
 app.use('/views', express.static('views'));
 app.use('/auth', require('./routes/auth'))
+
+app.use(express.urlencoded({extended: false}))
+app.use(express.json())
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'))
