@@ -7,7 +7,6 @@ const bodyParser = require('body-parser')
 router.use(bodyParser.urlencoded({ extended: true }));
 
 const mySQL = require('mysql');
-// const { error } = require('console');
 
 const dataBase = mySQL.createConnection({
     host: process.env.DB_HOST, 
@@ -30,19 +29,30 @@ router.post('/register', (req, res) => {
     } 
     if (results.length > 0) { 
       res.status(400).json({error: 'User with this email already exists'})
-    }
-    else { 
+    } else { 
       dataBase.query(`CALL RegisterUser('${name}', '${email}', '${password}')`)
       res.status(200).json({message: 'User registered'})
     }
   })
 })
 
-router.post('/login', (req, res) => {
+router.post('/signin', (req, res) => {
   const login = req.body.login
   const password = req.body.password
-
-
-})
+  const sqlL = `SELECT Username, Email FROM users WHERE Email = ? AND Password = ?`
+  
+  dataBase.query(sqlL, [login, password], (error, results) => {
+    if (error) { 
+      console.log('Database error:', error)
+      res.status(500).json({error: 'Database error'}) 
+    }
+    if (results.length > 0) {
+      var response =  results
+      res.status(200).json({message: response})
+    } else {
+      res.status(400).json({error: 'Failed, email or password are incorrect'})
+    }
+  })
+}) 
 
 module.exports = router
