@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const path = require('path')
+const bcrypt = require('bcrypt')
+const saltRounds = 10
 
 const bodyParser = require('body-parser')
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -15,14 +16,15 @@ const dataBase = mySQL.createConnection({
     database: process.env.DB_DATABASE
 })
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
+  const salt =  await bcrypt.genSalt(saltRounds)
+
   const name = req.body.username
   const email = req.body.email 
-  const password = req.body.password
+  const password = await bcrypt.hash(req.body.password, salt)
 
   const sqlQ = `SELECT Email FROM users WHERE Email = ?`
   dataBase.query(sqlQ, [email], (error, results) => {
-
     if (error) { 
       console.log('Database error:', error)
       res.status(500).json({error: 'Database error'})
@@ -36,23 +38,30 @@ router.post('/register', (req, res) => {
   })
 })
 
-router.post('/signin', (req, res) => {
+router.post('/signin', async (req, res) => {
   const login = req.body.login
   const password = req.body.password
-  const sqlL = `SELECT Username, Email FROM users WHERE Email = ? AND Password = ?`
   
-  dataBase.query(sqlL, [login, password], (error, results) => {
+  const sqlL = `SELECT Username, Email, Password FROM users WHERE Email = ?`
+
+  dataBase.query(sqlL, [login], async (error, results) => {
     if (error) { 
       console.log('Database error:', error)
       res.status(500).json({error: 'Database error'}) 
     }
     if (results.length > 0) {
-      var response =  results
-      res.status(200).json({message: response})
+      const hashedPassword = results[0].Password;
+      const passwordMatch = await bcrypt.compare(password, hashedPassword);
+
+      if (passwordMatch) {
+        res.status(200).json({ message: 'Login successful', user: results[0] });
+      } else {
+        res.status(400).json({ error: 'Failed, email or password are incorrect' });
+      }
     } else {
-      res.status(400).json({error: 'Failed, email or password are incorrect'})
+      res.status(400).json({ error: 'Failed, email or password are incorrect' });
     }
-  })
+  });
 }) 
 
 module.exports = router
