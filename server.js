@@ -29,9 +29,6 @@ app.get('/', (req, res) => {
 })
 
 app.get('/login', authToken, (req, res) => {
-  if(!authToken) {
-    res.sendFile(path.join(__dirname, '/views/signin.html'))
-  }
   res.sendFile(path.join(__dirname, '/views/user-profile.html'))
 })
 
@@ -39,35 +36,47 @@ app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, '/views/register.html'))
 })
 
+app.get('/logout', logoutToken, (req, res) => {
+  res.sendFile(path.join(__dirname, '/index.html'))
+})
+
 app.listen(port, () => {
   console.log(`Hosting port: ${port}`)
 })
 
-function authToken(req, res, next) {
-  const cookies = req.headers.cookie;
+function getCookie(cookies) {
+  const cookieArray = cookies.split(';').map(cookie => cookie.trim().split('='))
+  const tokenPair = cookieArray.find(cookie => cookie[0] === 'user-auth')
   
-  if (!cookies) {
-    return res.status(401).send('Unauthorized')
+  return tokenPair[1]
+}
+
+function authToken(req, res, next) {
+  const cookies = req.headers.cookie
+  
+  try {
+    const token = getCookie(cookies)
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+      if (err) {
+        console.error('JWT Verification Error:', err)
+      }
+      req.user = user;
+      next()
+    })
+  } catch (error) {
+    res.sendFile(path.join(__dirname, '/views/signin.html'))
   }
+}
 
-  const cookieArray = cookies.split(';').map(cookie => cookie.trim().split('='));
-  const tokenPair = cookieArray.find(cookie => cookie[0] === 'user-auth');
-
-  if (!tokenPair) {
-    return res.status(401).send('Unauthorized')
-  }
-
-  const token = tokenPair[1]
-
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) {
-      console.error('JWT Verification Error:', err)
-      return res.status(401).send('Unauthorized')
-    }
-    req.user = user;
+function logoutToken(req, res, next) {
+  
+  try {
+    res.status(201).clearCookie('user-auth')
     next()
-  })
-  return true
+  } catch (error) {
+    res.status(403).json({error: 'Cannot remove token'})
+  }
 }
 
 dataBase.connect( (error) => {
